@@ -2,7 +2,7 @@ from pathlib import Path
 import argparse
 import sys
 import json
-
+import os
 
 def step_1(char):
     try:
@@ -66,4 +66,10 @@ if __name__ == '__main__':
         print(f"File {str(file).split('/')[-1]} does not exist.")
         sys.exit()
 
-    print(check_syntax_json(args.file_name))
+    print(check_syntax_json(file))
+    
+    # TODO: if you want to test json_test_suites
+    # for path, dir, file_list in os.walk('json_test_suites'):
+    #     for file_name in file_list:
+
+    #         print(check_syntax_json(f"{path}/{file_name}"))
