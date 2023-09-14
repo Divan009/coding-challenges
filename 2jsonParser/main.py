@@ -17,7 +17,7 @@ def check_syntax_json(file):
     
 
 if __name__ == '__main__':
-    msg = "This is a copy of wc"
+    msg = "This validates JSON file"
     parser = argparse.ArgumentParser(description=msg)
 
     # Adding optional arguments    
