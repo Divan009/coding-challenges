@@ -11,7 +11,7 @@ def step_1(char):
     except IndexError:
         return 1 
     
-def step_2(char):
+def validates_json_obj(char):
     try:
         parsed_json = json.loads(char)
 
@@ -45,7 +45,7 @@ def check_syntax_json(file):
             if value != 0:
                 return "Invalid JSON file"
             
-            value = step_2(char)
+            value = validates_json_obj(char)
             if value != 0:
                 return "Invalid JSON file"
 
