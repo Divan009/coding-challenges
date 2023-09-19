@@ -1,13 +1,12 @@
 from collections import defaultdict
 
-def compression_alg(file):
-    
-    char_count = defaultdict(int)
 
+def frequency_counter(file):
+    char_count = defaultdict(int)
     with open(file) as f:
         while True:
             char = f.read(1)
-            
+
             if not char:
                 break
 
@@ -19,7 +18,8 @@ def compression_alg(file):
 
         return char_count
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     import argparse
     from pathlib import Path
     import sys
@@ -37,7 +37,4 @@ if __name__ == '__main__':
         print(f"File: {file} doesn't exist.")
         sys.exit()
 
-    print(compression_alg(file))
-
-
-
+    print(frequency_counter(file))
