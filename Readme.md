@@ -32,6 +32,8 @@ https://codingchallenges.fyi/challenges/intro
 
    3. curl http://localhost:1111/
    
+   4. start a health check 
+   python3 healthcheck.py --tries <int; default=10>
    ```
    
 6. 
