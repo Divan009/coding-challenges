@@ -15,7 +15,16 @@
 
 3. Compression (Yet to be completely implemented)
 
-4. Cut Tool (Yet to be implemented)
+4. Cut Tool 
+   ```
+   alias cut="python3 main.py"
+
+   - cut -f1 sample.tsv -> proper value
+   - cut -f1 -d, fourchords.csv | head -n5 -> proper value
+   - cut -f20 sample.tsv -> blank
+   - cut -f2.0 sample.tsv -> err msg
+
+   ```
 
 5. Load Balancer
   
