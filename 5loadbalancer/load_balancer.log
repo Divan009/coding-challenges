@@ -1,0 +1,7 @@
+2023-09-20 20:19:21,673 - INFO - Load balancer listening on port 1111
+2023-09-20 20:19:25,688 - INFO - Received request from ('127.0.0.1', 41092)
+2023-09-20 20:19:25,688 - INFO - Message sent to server running in 8003
+2023-09-20 20:19:28,216 - INFO - Received request from ('127.0.0.1', 44594)
+2023-09-20 20:19:28,216 - INFO - Message sent to server running in 8001
+2023-09-20 20:19:43,213 - INFO - Received request from ('127.0.0.1', 33924)
+2023-09-20 20:19:43,213 - INFO - Message sent to server running in 8002

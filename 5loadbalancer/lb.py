@@ -48,6 +48,3 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as lb_sock:
 
                 # Forward the backend response to the client
                 conn.sendall(response)
-
-# if __name__ == '__main__':
-#     load_balancer()
