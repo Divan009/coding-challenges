@@ -20,13 +20,13 @@ class HuffLeafNode(HuffBaseNode):
 
     def value(self):
         return self.element
-    
+
     def get_weight(self):
         return self.node_weight
-    
+
     def isLeaf(self):
         return True
-    
+
 
 # Define an Internal node class
 class HuffInternalNode(HuffBaseNode):
@@ -37,16 +37,16 @@ class HuffInternalNode(HuffBaseNode):
 
     def left(self):
         return self.left_child
-    
+
     def right(self):
         return self.right_child
-    
+
     def get_weight(self):
         return self.node_weight
-    
+
     def isLeaf(self):
         return False
-    
+
 
 # class HuffTree:
 #     def __init__(self, element=None, weight=None, left=None, right=None):
@@ -72,7 +72,7 @@ class HuffInternalNode(HuffBaseNode):
 
 # Define a Huffman Tree building function
 def buildTree(weights):
-     # Create leaf nodes for each element with their corresponding weights
+    # Create leaf nodes for each element with their corresponding weights
     nodes = [HuffLeafNode(element, weight) for element, weight in weights.items()]
 
     # Create a min-heap using the nodes
@@ -91,7 +91,7 @@ def buildTree(weights):
 
 
 # Sample weights for each element
-weights = {'A': 10, 'B': 15, 'C': 12, 'D': 3, 'E': 4, 'F': 13}
+weights = {"A": 10, "B": 15, "C": 12, "D": 3, "E": 4, "F": 13}
 
 # Build the Huffman tree using the weights
 huffman_tree = buildTree(weights)

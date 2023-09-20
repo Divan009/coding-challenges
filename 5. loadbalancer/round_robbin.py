@@ -8,7 +8,5 @@ class RoundRobbinLB:
         print(self.current_index)
         # Retrieves the server at the current index from the list of servers.
         server = self.servers[self.current_index]
-        self.current_index = (self.current_index+1) % len(self.servers)
+        self.current_index = (self.current_index + 1) % len(self.servers)
         return server
-    
-

@@ -4,13 +4,15 @@ import sys
 import json
 import os
 
+
 def step_1(char):
     try:
-        if char[0] == "{" and char[-1]== "}":
+        if char[0] == "{" and char[-1] == "}":
             return 0
     except IndexError:
-        return 1 
-    
+        return 1
+
+
 def validates_json_obj(char):
     try:
         parsed_json = json.loads(char)
@@ -18,22 +20,22 @@ def validates_json_obj(char):
         if isinstance(parsed_json, dict):
             for key, val in parsed_json.items():
                 if not (
-                    isinstance(key, str) and 
-                    (
-                        isinstance(val, str) or
-                        isinstance(val, int) or 
-                        isinstance(val, bool) or
-                        val is None or
-                        isinstance(val, list) or
-                        isinstance(val, dict)
+                    isinstance(key, str)
+                    and (
+                        isinstance(val, str)
+                        or isinstance(val, int)
+                        or isinstance(val, bool)
+                        or val is None
+                        or isinstance(val, list)
+                        or isinstance(val, dict)
                     )
                 ):
                     return 1
             return 0
     except json.JSONDecodeError:
-        return 1 
-    
-    
+        return 1
+
+
 def check_syntax_json(file):
     with open(file) as f:
         char = f.read()
@@ -44,20 +46,22 @@ def check_syntax_json(file):
             value = step_1(char)
             if value != 0:
                 return "Invalid JSON file"
-            
+
             value = validates_json_obj(char)
             if value != 0:
                 return "Invalid JSON file"
 
-            return "Valid JSON file"      
+            return "Valid JSON file"
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     msg = "This validates JSON file"
     parser = argparse.ArgumentParser(description=msg)
 
-    # Adding optional arguments    
-    parser.add_argument("file_name", nargs='?', default=None, help="the file to analyze")
+    # Adding optional arguments
+    parser.add_argument(
+        "file_name", nargs="?", default=None, help="the file to analyze"
+    )
     # Read arg from command lineon
     args = parser.parse_args()
 
@@ -67,7 +71,7 @@ if __name__ == '__main__':
         sys.exit()
 
     print(check_syntax_json(file))
-    
+
     # TODO: if you want to test json_test_suites
     # for path, dir, file_list in os.walk('json_test_suites'):
     #     for file_name in file_list:
