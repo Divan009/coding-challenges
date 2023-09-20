@@ -2,6 +2,13 @@ import socket
 import logging
 from round_robbin import RoundRobbinLB
 
+
+from utils import check_python_script_running
+
+if check_python_script_running('health_check.py'):
+    from healthcheck import port_status
+
+
 LB_HOST = 'localhost'
 LB_PORT = 1111
 BACKEND_HOST = 'localhost'
@@ -36,10 +43,21 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as lb_sock:
                 lb_port = load_balancers.get_next_server()
                 logging.info(f"Message sent to server running in {lb_port}")
 
-                be_sock.connect((BACKEND_HOST, lb_port))
-                be_sock.sendall(data)
-
-
+                if check_python_script_running('health_check.py'):
+                    if port_status[lb_port]:
+                        be_sock.connect((BACKEND_HOST, lb_port))
+                        be_sock.sendall(data)
+                    else:
+                        continue
+                else:
+                    try:
+                        be_sock.connect((BACKEND_HOST, lb_port))
+                    except ConnectionRefusedError:
+                        logging.error(f"server in port {lb_port} is not running.")
+                        lb_port = load_balancers.get_next_server()
+                        be_sock.connect((BACKEND_HOST, lb_port))
+                        logging.info(f"Therefore, connecting to a new port {lb_port}.")
+                    be_sock.sendall(data)
 
                 # Receive response from backend
                 response = be_sock.recv(1024)

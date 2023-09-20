@@ -1,6 +1,3 @@
-import logging 
-
-
 class RoundRobbinLB:
     def __init__(self, servers):
         # list of servers
@@ -13,3 +10,5 @@ class RoundRobbinLB:
         server = self.servers[self.current_index]
         self.current_index = (self.current_index+1) % len(self.servers)
         return server
+    
+
