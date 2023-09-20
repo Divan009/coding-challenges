@@ -15,6 +15,9 @@ https://codingchallenges.fyi/challenges/intro
     python3 test/valid.json
     ```
 
+3. Compression (Yet to be completely implemented)
+
+4. Cut Tool (Yet to be implemented)
 
 5. Load Balancer
   
