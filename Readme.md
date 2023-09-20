@@ -26,7 +26,7 @@ https://codingchallenges.fyi/challenges/intro
    python3 -m http.server --bind 127.0.0.1 8003 --directory www3
    python3 -m http.server --bind 127.0.0.1 8004 --directory www4
 
-   1. start lb server
+   2. start lb server
 
    python3 lb.py
 
