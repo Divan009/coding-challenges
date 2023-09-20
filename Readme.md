@@ -34,6 +34,16 @@ https://codingchallenges.fyi/challenges/intro
    
    4. start a health check 
    python3 healthcheck.py --tries <int; default=10>
+
+
+   curl --parallel --parallel-immediate --parallel-max 3 --config test.txt
    ```
    
+   Here are some other areas you could explore if you wish to take the project further and dig deeper into what makes a load balancer useful and how it works:
+
+   - [] Read up about HTTP keep-alive and how it is used to reuse back end connections until the timeout expires.
+   - [x] Add some Logging - think about the kinds of things that would be useful for a developer, i.e. which server did a client’s request go to, how long did the backend server take to process the request and so on.
+   - [] Build some automated tests that stand up the backend servers, a load balancer and a few clients. Check the load balancer can handle multiple clients at the same time.
+   - [] If you opted for threads, try converting it to use an async framework - or vice versa.
+
 6. 
