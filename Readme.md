@@ -18,12 +18,20 @@ https://codingchallenges.fyi/challenges/intro
 
 5. 
   
-   starting 4 servers
+   ```  
+   1. starting 4 servers 
 
-   ```   
    python3 -m http.server --bind 127.0.0.1 8001 --directory www
    python3 -m http.server --bind 127.0.0.1 8002 --directory www2
    python3 -m http.server --bind 127.0.0.1 8003 --directory www3
    python3 -m http.server --bind 127.0.0.1 8004 --directory www4
+
+   1. start lb server
+
+   python3 lb.py
+
+   3. curl http://localhost:1111/
    
    ```
+   
+6. 
