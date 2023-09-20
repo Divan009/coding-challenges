@@ -1,5 +1,3 @@
-https://codingchallenges.fyi/challenges/intro
-
 1. wc Tool
    
    ```
