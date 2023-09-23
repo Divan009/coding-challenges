@@ -1,18 +1,19 @@
 import argparse
 import sys
 
+
 def field_converter(field):
     """
     converts "1 2" or "1,2" into [1, 2]
     """
-    if ',' in field:
-        nums_list = field.split(',')
+    if "," in field:
+        nums_list = field.split(",")
     else:
-        nums_list = field.split(' ')
+        nums_list = field.split(" ")
 
     int_list = [int(item) for item in nums_list]
 
-    check_0 = any(num==0 for num in int_list)
+    check_0 = any(num == 0 for num in int_list)
     if check_0:
         print("cut: fields are numbered from 1")
         sys.exit()
@@ -24,12 +25,11 @@ def file_read_from_content(content, filename, column, delimiter="\t"):
 
     nums_list = field_converter(column)
     len_nums_list = len(nums_list)
-    
+
     for line in content:
         # print(line)
         stripped_columns = line.strip()
         columns = stripped_columns.split(delimiter)
-        
 
         if not filename or filename.endswith(".csv"):
             # if this delimiter == ,
@@ -38,30 +38,24 @@ def file_read_from_content(content, filename, column, delimiter="\t"):
                     print(columns[int(column) - 1])
                 else:
                     for i in range(len_nums_list):
-                        print(columns[int(nums_list[i])-1], end=', ')
-                    print(end='\n')
+                        print(columns[int(nums_list[i]) - 1], end=", ")
+                    print(end="\n")
             else:
                 print(stripped_columns)
 
-
-        elif filename.endswith(".tsv"): 
-            if delimiter == "\t":  
+        elif filename.endswith(".tsv"):
+            if delimiter == "\t":
                 if len_nums_list == 1:
                     print(columns[int(column) - 1])
                 else:
                     for i in range(len_nums_list):
-                        print(columns[int(nums_list[i])-1], end=', ')
-                    print(end='\n')
+                        print(columns[int(nums_list[i]) - 1], end=", ")
+                    print(end="\n")
             else:
                 print(stripped_columns)
 
-        
         else:
             print(stripped_columns)
-
-    # except (IndexError, BrokenPipeError):
-    #     print()
-
 
 
 if __name__ == "__main__":
@@ -85,13 +79,12 @@ if __name__ == "__main__":
     if not args.filename:
         content = sys.stdin.read()
         delimiter = ","
-        filename=None
-    else: 
-        filename = str(args.filename)   
+        filename = None
+    else:
+        filename = str(args.filename)
         with open(args.filename, "r") as f:
             content = f.readlines()
 
     if args.fields:
-        
+
         file_read_from_content(content, filename, args.fields, delimiter)
-    
