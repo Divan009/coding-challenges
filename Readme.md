@@ -24,6 +24,13 @@
    - cut -f20 sample.tsv -> blank
    - cut -f2.0 sample.tsv -> err msg
 
+   - cut -d, -f"1 2" fourchords.csv | head -n5
+   - cut -f2 -d, fourchords.csv | uniq | wc -l
+
+   This throws an err
+   - tail -n5 fourchords.csv | cut -d, -f"1 2"
+
+
    ```
 
 5. Load Balancer
