@@ -2,35 +2,51 @@ import argparse
 
 
 def tsv_file(file_name, column, delimiter="\t"):
-    try:
-        try:
-            if int(column) == 0:
-                print("cut: fields are numbered from 1")
-                return
-        except ValueError:
-            print("please give integer only")
-            return
-        
-        with open(file_name, "r") as f:
+    # try:
+    nums_list = column.split(',')
+    len_nums_list = len(nums_list)
+    # try:
+
+    check_0 = any(int(num)==0 for num in nums_list)
+
+    if check_0:
+        print("cut: fields are numbered from 1")
+        return
+    
+    
+    with open(file_name, "r") as f:
+        for line in f:
+            stripped_columns = line.strip()
+            columns = stripped_columns.split(delimiter)
+            
             if str(file_name).endswith(".tsv"): 
                 if delimiter == "\t":  
-                    for line in f:
-                        columns = line.strip().split(delimiter)
+                    if len_nums_list == 1:
                         print(columns[int(column) - 1])
+                    else:
+                        for i in range(len_nums_list):
+                            print(columns[int(nums_list[i])-1], end=', ')
+                        print(end='\n')
                 else:
-                    for line in f:
-                        print(line.strip())
-            elif str(file_name).endswith(".csv"):
-                if delimiter == ",":
-                    for line in f:
-                        columns = line.strip().split(delimiter)
-                        print(columns[int(column) - 1])
-                else:
-                    for line in f:
-                        print(line.strip())
+                    print(stripped_columns)
 
-    except IndexError:
-        print()
+            
+            elif str(file_name).endswith(".csv"):
+                # if this delimiter == ,
+                if delimiter == ",":
+                    if len_nums_list == 1:
+                        print(columns[int(column) - 1])
+                    else:
+                        for i in range(len_nums_list):
+                            print(columns[int(nums_list[i])-1], end=', ')
+                        print(end='\n')
+                else:
+                    print(stripped_columns)
+            else:
+                print(stripped_columns)
+
+    # except (IndexError, BrokenPipeError):
+    #     print()
 
 
 if __name__ == "__main__":
