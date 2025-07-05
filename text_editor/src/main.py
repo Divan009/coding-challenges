@@ -1,45 +1,27 @@
 import sys
-import tty
-import termios
-
-
-class TerminalMode:
-    """Context manager that sets the terminal to raw mode and restores it."""
-
-    def __enter__(self):
-        self.fd = sys.stdin.fileno()
-        self.old_settings = termios.tcgetattr(self.fd)
-
-        new_settings = self.old_settings[:]
-        lflag_index = 3  # termios.LFLAG is index 3 in the list
-
-        
-# this prints only after I press enter
-        # new_settings[lflag_index] &= ~termios.ECHO
-
-# this echos it as soon as i type
-        # new_settings[lflag_index] &= ~termios.ICANON
-
-        # Disable ECHO and ICANON
-        new_settings[lflag_index] &= ~(termios.ECHO | termios.ICANON)
-        
-
-        # Apply the new settings immediately
-        termios.tcsetattr(self.fd, termios.TCSAFLUSH, new_settings)
-        return self
-    
-    def __exit__(self, exc_type, exc_val, exc_tb):
-        termios.tcsetattr(self.fd, termios.TCSAFLUSH, self.old_settings)
+from unix_modes import TerminalMode, is_control, safe_ord
+import os
 
 if __name__ == "__main__":
-    print("Press keys (Ctrl-C or Enter to quit)…")
+    print("Press keys q quit)…")
     with TerminalMode():
         try:
             while True:
-                ch = sys.stdin.read(1)      # 1 byte at a time, no buffering
-                if ch in ("\n", "\r", "\x03"):  # Enter or Ctrl-C
-                    break
-                print(f"Got byte: {repr(ch)}")
+                
+                ch = '\0'
+                ch = sys.stdin.read(1)
+                if ch == "q":
+                    sys.exit(1)
+
+                if is_control(ch):
+                    # print("this is a control char ", ord(ch), end='', flush=True)
+                    print("this is a control char ", safe_ord(ch))
+                else:
+                    if safe_ord(ch) == -1:
+                        print(ch)
+                    else:
+                        print(f"ASCII: {ch}, {ch} \r\n")
+
         except KeyboardInterrupt:
             pass
     print("\nTerminal settings restored.")
